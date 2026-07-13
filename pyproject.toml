@@ -22,6 +22,5 @@ dependencies = [
 [project.scripts]
 trello-integrator = "trello_integrator:main"
 
-[tool.setuptools.modules]
-# Mapeia o arquivo trello_integrator.py como um módulo direto
-modules = ["trello_integrator"]
+[tool.setuptools]
+py-modules = ["trello_integrator", "trello_mcp_server"]
