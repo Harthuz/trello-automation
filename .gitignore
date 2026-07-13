@@ -1,0 +1,29 @@
+# Ambientes virtuais e dependências
+.venv/
+venv/
+ENV/
+env/
+dist/
+build/
+*.egg-info/
+
+# Arquivos de ambiente e chaves secretas (CRÍTICO)
+.env
+.env.local
+.env.*.local
+
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos de teste e IDEs
+.pytest_cache/
+.coverage
+htmlcov/
+.vscode/
+.idea/
+
+# Arquivos locais de definição de sprint de teste
+sprint_definition.json

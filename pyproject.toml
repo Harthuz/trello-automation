@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trello-automation-cli"
+version = "0.1.0"
+description = "Uma CLI para automatizar o planejamento e criação de sprints no Trello usando JSON DSL"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "requests>=2.31.0",
+]
+
+[project.scripts]
+trello-integrator = "trello_integrator:main"
+
+[tool.setuptools.modules]
+# Mapeia o arquivo trello_integrator.py como um módulo direto
+modules = ["trello_integrator"]

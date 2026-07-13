@@ -1,0 +1,16 @@
+{
+  "name": "trello_integrator",
+  "description": "Automatiza a criação de Sprints, quadros, listas, etiquetas, checklists e cartões no Trello a partir de um arquivo JSON estruturado (DSL).",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "dsl_path": {
+        "type": "string",
+        "description": "Caminho local para o arquivo JSON contendo as definições das listas e cartões da Sprint (ex: 'sprint_definition.json')."
+      }
+    },
+    "required": ["dsl_path"]
+  },
+  "runtime": "python",
+  "entrypoint": "python trello_integrator.py"
+}
