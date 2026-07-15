@@ -21,15 +21,38 @@ Além de rodar localmente no seu terminal, esta ferramenta foi estruturada para 
 
 ## 🚀 Como Instalar Localmente (Modo CLI)
 
-Você pode instalar a ferramenta localmente de forma global no seu computador executando o seguinte comando no diretório do projeto:
+Você tem duas formas principais de instalar o utilitário em seu computador usando o terminal/Command Prompt (CMD):
 
-```powershell
+### Opção A: Instalar via PyPI (Recomendado para uso geral)
+Abra o Prompt de Comando (CMD) e execute o comando abaixo para baixar e instalar o pacote oficial publicado:
+```cmd
+pip install trello-automation-cli
+```
+*(Caso o comando `pip` não seja reconhecido no seu CMD, utilize: `python -m pip install trello-automation-cli`)*
+
+### Opção B: Instalar a partir do repositório clonado (Desenvolvimento)
+Navegue até a pasta do repositório clonado pelo Prompt de Comando (CMD) e execute:
+```cmd
 pip install -e .
 ```
-* *Explicação:* O parâmetro `-e` (editable) instala a ferramenta em modo de desenvolvimento. Isso cria o comando global `trello-integrator` no seu terminal, permitindo que você execute a automação de qualquer lugar apenas digitando:
-  ```powershell
-  trello-integrator caminho/para/sprint.json
-  ```
+
+---
+
+## 💻 Como Utilizar pelo Prompt de Comando (CMD)
+
+Após a instalação, você pode executar o integrador de duas formas no Windows:
+
+### 1. Usando o comando global (Se as variáveis de ambiente PATH estiverem configuradas no Windows)
+No seu CMD, execute passando o arquivo JSON de definição de Sprint:
+```cmd
+trello-integrator caminho/para/sprint_definition.json
+```
+
+### 2. Chamando o script Python diretamente (Método mais compatível e seguro)
+Se o comando global não for encontrado, execute usando o Python diretamente do diretório raiz do projeto:
+```cmd
+python trello-automation/trello_integrator.py caminho/para/sprint_definition.json
+```
 
 ---
 

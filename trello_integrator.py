@@ -104,6 +104,7 @@ class TrelloClient:
 
 
 def main():
+    import webbrowser
     # Caminhos padrão
     env_file = os.path.join(os.path.dirname(__file__), ".env")
     
@@ -112,9 +113,30 @@ def main():
     api_key = env_vars.get("TRELLO_API_KEY")
     token = env_vars.get("TRELLO_TOKEN")
 
+    updated_env = False
+
+    if not api_key:
+        print("TRELLO_API_KEY não encontrada.")
+        print("Acesse para obter sua chave: https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/")
+        api_key = input("Cole sua API Key do Trello: ").strip()
+        updated_env = True
+
+    if api_key and not token:
+        print("TRELLO_TOKEN não encontrado. Abrindo o navegador para obter autorização...")
+        auth_url = f"https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&key={api_key}"
+        webbrowser.open(auth_url)
+        token = input("Cole o Token de acesso gerado no seu navegador: ").strip()
+        updated_env = True
+
     if not api_key or not token:
-        print("Erro: TRELLO_API_KEY ou TRELLO_TOKEN não encontrados no arquivo .env")
+        print("Erro: Credenciais de acesso incompletas ou vazias.")
         sys.exit(1)
+
+    if updated_env:
+        with open(env_file, "w", encoding="utf-8") as f:
+            f.write(f'TRELLO_API_KEY="{api_key}"\n')
+            f.write(f'TRELLO_TOKEN="{token}"\n')
+        print(f"Credenciais configuradas e salvas com sucesso em: {env_file}")
 
     # Determina o arquivo DSL de entrada
     dsl_file = "sprint_definition.json"
