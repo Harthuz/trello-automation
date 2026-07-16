@@ -208,6 +208,29 @@ def main():
             for item in checklist_items:
                 client.add_checklist_item(checklist_id, item)
 
+    # 5. Guardar o log da Sprint em arquivo
+    try:
+        from datetime import datetime
+        history_dir = os.path.join(os.path.dirname(os.path.abspath(dsl_file)), "history")
+        if not os.path.exists(history_dir):
+            os.makedirs(history_dir)
+        
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        sanitized_board_name = "".join(c for c in board_name if c.isalnum() or c in (" ", "_", "-")).strip().replace(" ", "_")
+        history_filename = f"sprint_{sanitized_board_name}_{timestamp}.json"
+        history_filepath = os.path.join(history_dir, history_filename)
+        
+        with open(history_filepath, "w", encoding="utf-8") as hist_f:
+            json.dump(dsl_data, hist_f, indent=4, ensure_ascii=True)
+            
+        log_filepath = os.path.join(history_dir, "sprints_history.log")
+        with open(log_filepath, "a", encoding="utf-8") as log_f:
+            log_f.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Quadro: {board_name} | Arquivo: {history_filename}\n")
+            
+        print(f"\nHistórico da sprint salvo localmente em: {history_filepath}")
+    except Exception as e:
+        print(f"\nAviso: Não foi possível salvar o histórico da sprint localmente: {e}")
+
     print("\nIntegração concluída com sucesso! Verifique seu quadro no Trello.")
 
 if __name__ == "__main__":
